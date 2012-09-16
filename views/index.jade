@@ -1,0 +1,23 @@
+h1= title
+p by #{author}
+form(method='post')
+  label Name:
+  input(type='text', name='name')
+  label Email:
+  input(type='email',name='email')
+  input(type='submit', value='Register')
+div.error=error
+ul#emails
+  if(typeof(users)!= "undefined")
+    each item in users
+      li
+        div.text
+          span #{item.name} - #{item.email}
+          a.edit(href='#') Edit 
+          a.delete(href='#') Delete
+        form.edit.hidden(method='post', action='/save')
+          input(type='hidden', name='id', value='#{item._id}')
+          input(type='text', name='name', value='#{item.name}')
+          input(type='text', name='email', value='#{item.email}')
+          a.save(href='#') Save  |
+          a.cancel(href='#c') Cancel
